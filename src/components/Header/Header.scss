@@ -1,0 +1,35 @@
+@import "../../styles/variables.scss";
+
+.header {
+    background-color: $clr-800;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    &__file {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+        padding-right: 0.5rem;
+
+        @media (min-width: $tablet) {
+            padding-right: 1rem;
+        }
+
+        &-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        &-button {
+            flex-shrink: 0;
+        }
+
+        &-button_save {
+            width: 40px;
+            aspect-ratio: 1 / 1;
+        }
+    }
+}

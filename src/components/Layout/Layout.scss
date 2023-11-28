@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.main {
+    display: grid;
+    grid-template-columns: 0px 100%;
+    transition: grid-template-columns $transition-regular;
+
+    &_open {
+        grid-template-columns: 250px 100%; 
+    }
+
+    &__menu {
+        overflow: hidden;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+    }
+}

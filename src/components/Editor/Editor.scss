@@ -1,0 +1,48 @@
+@import '../../styles/variables.scss';
+
+.editor {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 0fr;
+    position: relative;
+    transition: grid-template-columns $transition-regular;
+
+    @media (min-width: $tablet) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &_full-preview {
+        grid-template-columns: 0fr 1fr;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        &-fill {
+            width: 100%;
+            background-color: $clr-100;
+            padding: 1rem;
+            position: relative;
+        }
+    }
+    
+    &__markdown {
+        
+        &-textarea {
+            resize: none;
+            font-family: $ff-roboto-mono;
+            border: none;
+            outline: none;
+        }
+    }
+
+    &__preview {
+        border-left: 1px solid $clr-300;
+    }
+
+    &__preview-button {
+        position: absolute;
+    }
+}

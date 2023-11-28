@@ -1,0 +1,40 @@
+ /* --------- COLORS --------- */
+
+ $clr-100: rgba(255, 255, 255, 1);
+ $clr-200: rgba(245, 245, 245, 1);
+ $clr-300: rgba(228, 228, 228, 1);
+ $clr-400: rgba(193, 196, 203, 1);
+ $clr-500: rgba(124, 129, 135, 1);
+ $clr-600: rgba(90, 96, 105, 1);
+ $clr-700: rgba(53, 57, 63, 1);
+ $clr-800: rgba(43, 45, 49, 1);
+ $clr-900: rgba(29, 31, 34, 1);
+ $clr-1000: rgba(21, 22, 25, 1);
+
+ $clr-orange: rgba(228, 102, 67, 1);
+ $clr-orange-hover: rgba(243, 151, 101, 1);
+
+ /* --------- FONTS --------- */
+
+$ff-roboto: 'Roboto', sans-serif;
+$ff-roboto-mono: 'Roboto Mono', monospace;
+$ff-roboto-slab: 'Roboto Slab', serif;
+
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+
+$fs-body_s : 0.813rem;
+$fs-body_m: 0.875rem;
+$fs-body_l: 0.938rem;
+$lh-body: 1.5rem;
+
+/* --------- TRANSITIONS --------- */
+
+$transition-regular: 300ms;
+
+/* --------- BREAKPOINTS --------- */
+
+$tablet: 768px;
+$desktop: 1024px;
