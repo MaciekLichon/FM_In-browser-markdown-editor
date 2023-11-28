@@ -6,7 +6,6 @@ body {
   font-weight: $fw-regular;
   line-height: $lh-body;
   color: $clr-700;
-  overflow-x: hidden;
 }
 
 .text {
@@ -119,5 +118,6 @@ body {
     code {
         font-family: $ff-roboto-mono;
         color: $clr-700;
+        text-wrap: wrap;
     }
 }

@@ -1,24 +1,42 @@
 @import '../../styles/variables.scss';
 
+
+// two different transitions depending on screen size
+// 1. for fun
+// 2. to prevent huge vertical stretch when pasting markdown on mobile (when only the 'markdown' column was visible)...
+// ... this was a result of the 'preview' being squeezed what caused words to break into single letters and align vertically
+
 .editor {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 0fr;
+    grid-template-columns: 100% 100%;
     position: relative;
-    transition: grid-template-columns $transition-regular;
+    transition: transform $transition-regular, grid-template-columns $transition-regular;
 
     @media (min-width: $tablet) {
         grid-template-columns: 1fr 1fr;
     }
 
     &_full-preview {
-        grid-template-columns: 0fr 1fr;
+
+        @media (min-width: $tablet) {
+            grid-template-columns: 0fr 1fr;
+        }
+        
+        .editor__section {
+            transform: translateX(-100%);
+
+            @media (min-width: $tablet) {
+                transform: none;
+            }
+        }
     }
 
     &__section {
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        transition: transform $transition-regular;
 
         &-fill {
             width: 100%;
@@ -44,5 +62,7 @@
 
     &__preview-button {
         position: absolute;
+        right: 1rem;
+        top: 1rem;
     }
 }

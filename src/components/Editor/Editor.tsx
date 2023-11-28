@@ -15,12 +15,12 @@ const Editor: React.FC = () => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         if (textAreaRef.current) {
-          textAreaRef.current.style.height = "100%";
-          const scrollHeight = textAreaRef.current.scrollHeight;
-    
-          textAreaRef.current.style.height = scrollHeight + "px";
+            textAreaRef.current.style.height = "100%";
+            const scrollHeight = textAreaRef.current.scrollHeight;
+
+            textAreaRef.current.style.height = scrollHeight + "px";
         }
-      }, [textAreaRef, markdown]);
+    }, [textAreaRef, markdown]);
 
     return (
         <div className={`editor ${isPreviewFullWidth ? 'editor_full-preview' : ''}`}>
