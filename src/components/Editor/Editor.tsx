@@ -7,11 +7,17 @@ import Markdown from 'react-markdown';
 import showPreviewIcon from '../../assets/icon-show-preview.svg';
 import hidePreviewIcon from '../../assets/icon-hide-preview.svg';
 
-const Editor: React.FC = () => {
+interface IProps {
+    content: string;
+    updateMarkup: (v: string) => void;
+}
 
-    const [markdown, setMarkdown] = useState('');
+const Editor: React.FC<IProps> = ({content, updateMarkup}) => {
+    
     const [isPreviewFullWidth, setIsPreviewFullWidth] = useState(false);
 
+    // ----------- 
+    // update textarea's height with content to prevent container overflow and scrollbar from appearing
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         if (textAreaRef.current) {
@@ -20,18 +26,19 @@ const Editor: React.FC = () => {
 
             textAreaRef.current.style.height = scrollHeight + "px";
         }
-    }, [textAreaRef, markdown]);
+    }, [textAreaRef, content]);
+    // -----------
 
     return (
         <div className={`editor ${isPreviewFullWidth ? 'editor_full-preview' : ''}`}>
             <div className="editor__section editor__markdown">
                 <EditorSectionTitle title="markdown" />
-                <textarea ref={textAreaRef} className="editor__section-fill editor__markdown-textarea" value={markdown} onChange={(e) => setMarkdown(e.target.value)}></textarea>
+                <textarea ref={textAreaRef} className="editor__section-fill editor__markdown-textarea" value={content} onChange={(e) => updateMarkup(e.target.value)}></textarea>
             </div>
             <div className="editor__section editor__preview">
                 <EditorSectionTitle title="preview" />
                 <div className="editor__section-fill markdown-preview">
-                    <Markdown children={markdown} />
+                    <Markdown children={content} />
                 </div>
             </div>
             <button className="editor__preview-button" onClick={() => setIsPreviewFullWidth(!isPreviewFullWidth)}>

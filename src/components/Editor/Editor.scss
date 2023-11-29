@@ -1,6 +1,5 @@
 @import '../../styles/variables.scss';
 
-
 // two different transitions depending on screen size
 // 1. for fun
 // 2. to prevent huge vertical stretch when pasting markdown on mobile (when only the 'markdown' column was visible)...
@@ -43,6 +42,13 @@
             background-color: $clr-100;
             padding: 1rem;
             position: relative;
+            max-width: calc(672px + 1rem);
+            margin-inline: auto;
+
+            @media (min-width: $tablet) {
+                padding: 1.5rem;
+                max-width: calc(672px + 1.5rem);
+            }
         }
     }
     
