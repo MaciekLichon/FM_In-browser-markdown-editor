@@ -7,6 +7,7 @@ import { getAllDocuments } from "../../redux/documentsRedux";
 import FileNameButton from "../FileName/FileNameButton";
 
 import logo from "../../assets/logo.svg";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 
 interface IProps {
@@ -24,6 +25,9 @@ const SideBar: React.FC<IProps> = ({createDocument}) => {
       {documents.map((document) => (
         <FileNameButton key={document.id} id={document.id} dateAdded={document.createdAt} fileName={document.name} />
       ))}
+      <div className="sidebar__theme-toggle">
+        <ThemeToggle />
+      </div>
     </aside>
   );
 };

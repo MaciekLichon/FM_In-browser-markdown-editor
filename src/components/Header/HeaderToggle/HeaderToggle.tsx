@@ -1,14 +1,15 @@
 import React from 'react';
 import './HeaderToggle.scss';
 
-interface IProps {
-    toggleMenu: () => void;
-    isMenuOpen: boolean;
-}
+import { useSidebarContext, useSidebarToggleContext } from '../../../context/sideBarContext';
 
-const HeaderToggle: React.FC<IProps> = ({toggleMenu, isMenuOpen}) => {
+const HeaderToggle: React.FC = () => {
+
+    const isSidebarOpen = useSidebarContext();
+    const toggleSidebar = useSidebarToggleContext();
+
     return (
-        <button className={`header__toggle ${isMenuOpen ? 'header__toggle_open' : ''}`} onClick={toggleMenu}>
+        <button className={`header__toggle ${isSidebarOpen ? 'header__toggle_open' : ''}`} onClick={toggleSidebar}>
             <span></span>
             <span></span>
             <span></span>

@@ -9,10 +9,15 @@
     gap: 5px;
     width: 56px;
     aspect-ratio: 1 / 1;
+    transition: background-color $transition-regular;
 
     @media (min-width: $tablet) {
       width: 72px;
       gap: 6px;
+    }
+
+    &:hover {
+      background-color: $clr-orange;
     }
 
     span {

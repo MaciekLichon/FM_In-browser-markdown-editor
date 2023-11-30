@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Layout.scss';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -12,16 +12,16 @@ import { updateActiveId } from '../../redux/activeDocumentRedux';
 import SideBar from '../SideBar/SideBar';
 import Header from '../Header/Header';
 import Editor from '../Editor/Editor';
-import {DocumentContextProvider} from '../../context/documentContext';
+import { DocumentContextProvider } from '../../context/documentContext';
+import { useDarkModeContext } from '../../context/darkModeContext';
+import { useSidebarContext } from '../../context/sideBarContext';
 
 
 const Layout: React.FC = () => {
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    }
-
+    const isSidebarOpen = useSidebarContext();
+    const isDarkMode = useDarkModeContext();
+    
     const dispatch = useDispatch();
     const activeDocument = useSelector(getActiveDocument);
     const allDocuments = useSelector(getAllDocuments);
@@ -62,13 +62,13 @@ const Layout: React.FC = () => {
 
     
     return (
-        <main className={`main ${isMenuOpen ? 'main_open' : ''}`}>
+        <main className={`main ${isSidebarOpen ? 'main_open' : ''} ${isDarkMode ? 'darkmode' : ''}`}>
             <DocumentContextProvider>
                 <section className="main__menu">
                     <SideBar createDocument={createDocument} />
                 </section>
                 <section className="main__content">
-                    <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} deleteDocument={deleteDocument} saveDocument={saveDocument}/>
+                    <Header deleteDocument={deleteDocument} saveDocument={saveDocument}/>
                     <Editor />
                 </section>
             </DocumentContextProvider>

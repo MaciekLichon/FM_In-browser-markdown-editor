@@ -23,7 +23,7 @@ const FileNameButton: React.FC<IProps> = ({ id, dateAdded, fileName }) => {
     <button className="file-name" onClick={handleClick}>
       <img className="file-name__icon" src={iconDocument} alt="icon document" />
       <p className="text_body_s">{dateAdded}</p>
-      <p className=" text_body_l">{fileName}</p>
+      <p className="text_body_l file-name__title">{fileName}</p>
     </button>
   );
 };

@@ -39,7 +39,7 @@ export const useDocumentContext = () => {
     const documentContext = useContext(DocumentContext);
 
     if (documentContext === undefined) {
-        throw new Error('useDocumentContext must be ysed with a DocumentContext');
+        throw new Error('useDocumentContext must be used with a DocumentContext');
     }
 
     return documentContext;

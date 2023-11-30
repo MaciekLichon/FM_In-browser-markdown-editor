@@ -7,6 +7,14 @@
     column-gap: 1rem;
     text-align: left;
 
+    &__title {
+        transition: color $transition-regular;
+    }
+
+    &:hover &__title {
+        color: $clr-orange;
+    }
+
     &__icon {
         grid-row: span 2;
     }

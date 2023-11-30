@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__icon path {
+        transition: fill $transition-regular;
+    }
+
+    &__icon:nth-of-type(2) path {
+        fill: $clr-100;
+    }
+
+    &_dark {
+        .theme-toggle__icon:nth-of-type(1) path {
+            fill: $clr-100;
+        }
+        .theme-toggle__icon:nth-of-type(2) path {
+            fill: $clr-600;
+        }
+        .theme-toggle__indicator::after {
+            right: calc(100% - 18px);
+        }
+    }
+
+    &__indicator {
+        $padding: 6px;
+
+        width: 48px;
+        background-color: $clr-600;
+        height: 24px;
+        border-radius: 12px;
+        padding: $padding;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background-color: $clr-100;
+            right: $padding;
+            top: $padding;
+            transition: right $transition-regular;
+        }
+    }
+}

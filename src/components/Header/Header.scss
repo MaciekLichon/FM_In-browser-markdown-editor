@@ -41,6 +41,15 @@
             flex-shrink: 0;
         }
 
+        &-button_delete {
+            path {
+                transition: fill $transition-regular;
+            }
+            &:hover path {
+                fill: $clr-orange;
+            }
+        }
+
         &-button_save {
             width: 40px;
             aspect-ratio: 1 / 1;

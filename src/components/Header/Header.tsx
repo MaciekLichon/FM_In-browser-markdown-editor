@@ -3,7 +3,6 @@ import "./Header.scss";
 
 import { IDocument } from "../../redux/initialState";
 
-import iconDelete from "../../assets/icon-delete.svg";
 import iconSave from "../../assets/icon-save.svg";
 import logo from '../../assets/logo.svg';
 
@@ -11,29 +10,27 @@ import HeaderToggle from "./HeaderToggle/HeaderToggle";
 import FileNameInput from "../FileName/FileNameInput";
 import { useDocumentContext } from "../../context/documentContext";
 
+
 interface IProps {
-  toggleMenu: () => void;
-  isMenuOpen: boolean;
   deleteDocument: (v: string) => void;
   saveDocument: (v: IDocument) => void;
 }
 
-
-const Header: React.FC<IProps> = ({ toggleMenu, isMenuOpen, deleteDocument, saveDocument }) => {
+const Header: React.FC<IProps> = ({ deleteDocument, saveDocument }) => {
 
     const {documentData} = useDocumentContext();
 
     return (
         <header className="header">
-            <HeaderToggle toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+            <HeaderToggle />
             <div className="header__logo">
                 <img src={logo} alt="logo" />
             </div>
             <div className="header__file">
                 <FileNameInput />
                 <div className="header__file-buttons">
-                    <button className="header__file-button" onClick={() => deleteDocument(documentData.id)}>
-                        <img src={iconDelete} alt="icon delete" />
+                    <button className="header__file-button header__file-button_delete" onClick={() => deleteDocument(documentData.id)}>
+                        <svg width="18" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 16a1 1 0 0 0 1-1V9a1 1 0 1 0-2 0v6a1 1 0 0 0 1 1ZM17 4h-4V3a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v1H1a1 1 0 1 0 0 2h1v11a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V6h1a1 1 0 0 0 0-2ZM7 3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1H7V3Zm7 14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6h10v11Zm-3-1a1 1 0 0 0 1-1V9a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1Z" fill="#7C8187"/></svg>
                     </button>
                     <button className="header__file-button header__file-button_save button-action" onClick={() => saveDocument(documentData)}>
                         <img src={iconSave} alt="icon save" />

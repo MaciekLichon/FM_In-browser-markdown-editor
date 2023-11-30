@@ -36,10 +36,10 @@
         flex-direction: column;
         overflow: hidden;
         transition: transform $transition-regular;
+        background-color: $clr-100;
 
         &-fill {
             width: 100%;
-            background-color: $clr-100;
             padding: 1rem;
             position: relative;
             max-width: calc(672px + 1rem);
@@ -59,6 +59,8 @@
             font-family: $ff-roboto-mono;
             border: none;
             outline: none;
+            color: $clr-700;
+            background: none;
         }
     }
 
@@ -70,5 +72,12 @@
         position: absolute;
         right: 1rem;
         top: 1rem;
+
+        path {
+            transition: fill $transition-regular;
+        }
+        &:hover path {
+            fill: $clr-orange;
+        }
     }
 }
