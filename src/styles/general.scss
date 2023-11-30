@@ -23,7 +23,8 @@ button {
     justify-content: center;
     transition: background-color $transition-regular;
     color: $clr-100;
-    padding: 0.625rem 0 0.75rem 0;
+    padding-top: 0.625rem;
+    padding-bottom: 0.75rem;
 
     &:hover {
         background-color: $clr-orange-hover;

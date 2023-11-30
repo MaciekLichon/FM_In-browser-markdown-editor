@@ -12,5 +12,9 @@
 
     &__logo {
         align-self: flex-start;
+
+        @media (min-width: $desktop) {
+            display: none;
+        }
     }
 }

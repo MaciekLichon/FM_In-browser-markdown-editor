@@ -2,19 +2,17 @@ import React, {useState, useRef, useEffect} from 'react';
 import './Editor.scss';
 
 import EditorSectionTitle from '../EditorSectionTitle/EditorSectionTitle';
+import { useDocumentContext } from '../../context/documentContext';
 import Markdown from 'react-markdown';
 
 import showPreviewIcon from '../../assets/icon-show-preview.svg';
 import hidePreviewIcon from '../../assets/icon-hide-preview.svg';
 
-interface IProps {
-    content: string;
-    updateMarkup: (v: string) => void;
-}
 
-const Editor: React.FC<IProps> = ({content, updateMarkup}) => {
+const Editor: React.FC = () => {
     
     const [isPreviewFullWidth, setIsPreviewFullWidth] = useState(false);
+    const {documentData, setDocumentData} = useDocumentContext();
 
     // ----------- 
     // update textarea's height with content to prevent container overflow and scrollbar from appearing
@@ -26,19 +24,19 @@ const Editor: React.FC<IProps> = ({content, updateMarkup}) => {
 
             textAreaRef.current.style.height = scrollHeight + "px";
         }
-    }, [textAreaRef, content]);
+    }, [textAreaRef, documentData.content]);
     // -----------
 
     return (
         <div className={`editor ${isPreviewFullWidth ? 'editor_full-preview' : ''}`}>
             <div className="editor__section editor__markdown">
                 <EditorSectionTitle title="markdown" />
-                <textarea ref={textAreaRef} className="editor__section-fill editor__markdown-textarea" value={content} onChange={(e) => updateMarkup(e.target.value)}></textarea>
+                <textarea ref={textAreaRef} className="editor__section-fill editor__markdown-textarea" value={documentData.content} onChange={(e) => setDocumentData({...documentData, content: e.target.value})}></textarea>
             </div>
             <div className="editor__section editor__preview">
                 <EditorSectionTitle title="preview" />
                 <div className="editor__section-fill markdown-preview">
-                    <Markdown children={content} />
+                    <Markdown children={documentData.content} />
                 </div>
             </div>
             <button className="editor__preview-button" onClick={() => setIsPreviewFullWidth(!isPreviewFullWidth)}>

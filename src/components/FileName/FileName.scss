@@ -13,6 +13,7 @@
 
     &__input {
         max-width: 150px;
+        text-overflow: ellipsis;
 
         @media (min-width: $tablet) {
             grid-row: 2;

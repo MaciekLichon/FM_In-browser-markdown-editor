@@ -1,5 +1,10 @@
 import { IActiveDocument } from "./initialState";
 
+interface IAction {
+  type: string;
+  payload: IActiveDocument;
+}
+
 // actions
 
 const createActionName = (actionName: string) => `app/documents/${actionName}`;
@@ -11,7 +16,7 @@ export const updateActiveId = (payload: IActiveDocument) => ({ type: UPDATE_ACTI
 
 // subreducer
 
-const activeDocumentReducer = (statePart = '', action) => {
+const activeDocumentReducer = (statePart = '', action: IAction) => {
   switch(action.type) {
     case UPDATE_ACTIVE_DOCUMENT:
       return action.payload

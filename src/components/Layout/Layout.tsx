@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './Layout.scss';
 
 import { v4 as uuidv4 } from 'uuid';
+import { getTodaysDate } from '../../utils';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { IDocument } from '../../redux/initialState';
 import { getActiveDocument, getAllDocuments, removeDocument, editDocument, addDocument } from '../../redux/documentsRedux';
+import { updateActiveId } from '../../redux/activeDocumentRedux';
 
 import SideBar from '../SideBar/SideBar';
 import Header from '../Header/Header';
 import Editor from '../Editor/Editor';
-import { updateActiveId } from '../../redux/activeDocumentRedux';
-import { IDocument } from '../../redux/initialState';
+import {DocumentContextProvider} from '../../context/documentContext';
 
 
 const Layout: React.FC = () => {
@@ -20,16 +22,22 @@ const Layout: React.FC = () => {
         setIsMenuOpen(!isMenuOpen);
     }
 
+    const dispatch = useDispatch();
     const activeDocument = useSelector(getActiveDocument);
     const allDocuments = useSelector(getAllDocuments);
-    const [documentData, setDocumentData] = useState(activeDocument);
-
-    useEffect(() => {
-        setDocumentData(activeDocument);
-    }, [activeDocument]);
-
-    const dispatch = useDispatch();
-
+        
+    const createDocument = () => {
+        const id = uuidv4();
+        const newDocument: IDocument = {
+            id: id,
+            createdAt: getTodaysDate(),
+            name: `${id}.md`,
+            content: "",
+        }
+        dispatch(addDocument(newDocument));
+        dispatch(updateActiveId(id));
+    };
+        
     const deleteDocument = (currentId: string) => {
         let firstAvailableId = '';
                     
@@ -48,58 +56,22 @@ const Layout: React.FC = () => {
         dispatch(removeDocument(currentId));
     };
 
-    const changeDocument = (document: IDocument) => {
+    const saveDocument = (document: IDocument) => {
         dispatch(editDocument({...document}))
     };
 
-    const adjustNumber = (number: number) => {
-        if (number < 10) {
-            return `0${number}`;
-        } else {
-            return number;
-        }
-    }
-
-    const getTodaysDate = () => {
-        const date = new Date();
-
-        const day = adjustNumber(date.getDate());
-        const month = adjustNumber(date.getMonth() + 1);
-        const year = adjustNumber(date.getFullYear());
-
-        return `${day}-${month}-${year}`;
-    }
-
-    const createDocument = () => {
-        const id = uuidv4();
-        dispatch(addDocument(
-            {
-                id: id,
-                createdAt: getTodaysDate(),
-                name: `${id}.md`,
-                content: "",
-            },
-        ));
-        dispatch(updateActiveId(id));
-    };
-
-    const updateFileName = (fileName: string) => {
-        setDocumentData({...documentData, name: fileName})
-    };
-
-    const updateMarkup = (markup: string) => {
-        setDocumentData({...documentData, content: markup})
-    };
     
     return (
         <main className={`main ${isMenuOpen ? 'main_open' : ''}`}>
-            <section className="main__menu">
-                <SideBar createDocument={createDocument} />
-            </section>
-            <section className="main__content">
-                <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} documentData={documentData} updateFileName={updateFileName} deleteDocument={deleteDocument} changeDocument={changeDocument}/>
-                <Editor content={documentData.content} updateMarkup={updateMarkup} />
-            </section>
+            <DocumentContextProvider>
+                <section className="main__menu">
+                    <SideBar createDocument={createDocument} />
+                </section>
+                <section className="main__content">
+                    <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} deleteDocument={deleteDocument} saveDocument={saveDocument}/>
+                    <Editor />
+                </section>
+            </DocumentContextProvider>
         </main>
     );
 };
