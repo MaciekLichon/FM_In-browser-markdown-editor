@@ -1,19 +1,23 @@
-import React from 'react';
-import './FileName.scss';
+import React from "react";
+import "./FileName.scss";
 
-import iconDocument from '../../assets/icon-document.svg';
+import iconDocument from "../../assets/icon-document.svg";
 
-import { useDocumentContext } from '../../context/documentContext';
-
+import { useUnsavedDocumentContext } from "../../context/unsavedDocumentContext";
 
 const FileNameInput: React.FC = () => {
 
-    const {documentData, setDocumentData} = useDocumentContext();
-    
+    const { unsavedActiveDocument, setUnsavedActiveDocument } = useUnsavedDocumentContext();
+
     return (
         <div className="file-name">
             <img className="file-name__icon" src={iconDocument} alt="icon document" />
-            <input type="text" className="file-name__input text_body_l" value={documentData.name} onChange={(e) => setDocumentData({...documentData, name: e.target.value})}/>
+            <input
+                type="text"
+                className="file-name__input text_body_l"
+                value={unsavedActiveDocument.name}
+                onChange={(e) => setUnsavedActiveDocument({ ...unsavedActiveDocument, name: e.target.value })}
+            />
             <p className="text_body_s">Document name</p>
         </div>
     );

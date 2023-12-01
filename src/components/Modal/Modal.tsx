@@ -30,9 +30,11 @@ const Modal: React.FC<IProps> = ({title, message, buttonPrimaryText, actionPrima
                 <p className="modal__message">{message}</p>
                 <div className="modal__buttons">
                     <button onClick={actionPrimary} className="button-action text_body_l">{buttonPrimaryText}</button>
-                    {(actionSecondary && buttonSecondaryText) && <button className="modal__button-decline text_body_s" onClick={actionSecondary}>
-                        {buttonSecondaryText}
-                    </button>}
+                    {(actionSecondary && buttonSecondaryText) && (
+                        <button className="modal__button-decline text_body_s" onClick={actionSecondary}>
+                            {buttonSecondaryText}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

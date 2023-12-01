@@ -9,7 +9,10 @@ const HeaderToggle: React.FC = () => {
     const toggleSidebar = useSidebarToggleContext();
 
     return (
-        <button className={`header__toggle ${isSidebarOpen ? 'header__toggle_open' : ''}`} onClick={toggleSidebar}>
+        <button 
+            className={`header__toggle ${isSidebarOpen ? 'header__toggle_open' : ''}`} 
+            onClick={toggleSidebar}
+        >
             <span></span>
             <span></span>
             <span></span>

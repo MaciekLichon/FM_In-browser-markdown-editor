@@ -1,14 +1,14 @@
-import { createStore, combineReducers } from 'redux';
-import initialState from './initialState';
-import documentsReducer from './documentsRedux';
-import activeDocumentReducer from './activeDocumentRedux';
+import { createStore, combineReducers } from "redux";
+import initialState from "./initialState";
+import documentsReducer from "./documentsRedux";
+import selectedDocumentIdReducer from "./selectedDocumentIdRedux";
 
 // reducer
 
 const subreducers = {
   documents: documentsReducer,
-  activeDocument: activeDocumentReducer
-}
+  selectedDocumentId: selectedDocumentIdReducer,
+};
 
 const reducer = combineReducers(subreducers);
 

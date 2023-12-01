@@ -1,13 +1,13 @@
-import React from 'react';
-import Layout from './components/Layout/Layout';
-import { DarkModeContextProvider } from './context/darkModeContext';
-import { SidebarContextProvider } from './context/sideBarContext';
-import { ModalContextProvider } from './context/modalContext';
-import { DocumentContextProvider } from './context/documentContext';
+import React from "react";
+import Layout from "./components/Layout/Layout";
+import { DarkModeContextProvider } from "./context/darkModeContext";
+import { SidebarContextProvider } from "./context/sideBarContext";
+import { ModalContextProvider } from "./context/modalContext";
+import { UnsavedDocumentContextProvider } from "./context/unsavedDocumentContext";
 
 const App: React.FC = () => {
   return (
-    <DocumentContextProvider>
+    <UnsavedDocumentContextProvider>
       <DarkModeContextProvider>
         <SidebarContextProvider>
           <ModalContextProvider>
@@ -15,7 +15,7 @@ const App: React.FC = () => {
           </ModalContextProvider>
         </SidebarContextProvider>
       </DarkModeContextProvider>
-    </DocumentContextProvider>
+    </UnsavedDocumentContextProvider>
   );
 };
 
