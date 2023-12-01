@@ -12,30 +12,43 @@ import { updateActiveId } from '../../redux/activeDocumentRedux';
 import SideBar from '../SideBar/SideBar';
 import Header from '../Header/Header';
 import Editor from '../Editor/Editor';
-import { DocumentContextProvider } from '../../context/documentContext';
+import Modal from '../Modal/Modal';
+import { useDocumentContext } from '../../context/documentContext';
 import { useDarkModeContext } from '../../context/darkModeContext';
 import { useSidebarContext } from '../../context/sideBarContext';
+import { useModalContext, useModalToggleContext } from '../../context/modalContext';
 
 
 const Layout: React.FC = () => {
 
     const isSidebarOpen = useSidebarContext();
     const isDarkMode = useDarkModeContext();
+    const modalStatus = useModalContext();
+    const setModalStatus = useModalToggleContext();
+    const {documentData} = useDocumentContext();
+    
     
     const dispatch = useDispatch();
     const activeDocument = useSelector(getActiveDocument);
     const allDocuments = useSelector(getAllDocuments);
         
     const createDocument = () => {
-        const id = uuidv4();
-        const newDocument: IDocument = {
-            id: id,
-            createdAt: getTodaysDate(),
-            name: `${id}.md`,
-            content: "",
+        const equalNames = activeDocument.name === documentData.name;
+        const equalContent = activeDocument.content === documentData.content;
+    
+        if (!equalContent || !equalNames) {
+          setModalStatus('open-unsaved');
+        } else {
+            const id = uuidv4();
+            const newDocument: IDocument = {
+                id: id,
+                createdAt: getTodaysDate(),
+                name: `${id}.md`,
+                content: "",
+            }
+            dispatch(addDocument(newDocument));
+            dispatch(updateActiveId(id));
         }
-        dispatch(addDocument(newDocument));
-        dispatch(updateActiveId(id));
     };
         
     const deleteDocument = (currentId: string) => {
@@ -54,24 +67,38 @@ const Layout: React.FC = () => {
         firstAvailableId === '' ? createDocument() : dispatch(updateActiveId(firstAvailableId));
 
         dispatch(removeDocument(currentId));
+        setModalStatus('closed');
     };
 
     const saveDocument = (document: IDocument) => {
-        dispatch(editDocument({...document}))
+        dispatch(editDocument({...document}));
+        setModalStatus('closed');
     };
 
     
     return (
         <main className={`main ${isSidebarOpen ? 'main_open' : ''} ${isDarkMode ? 'darkmode' : ''}`}>
-            <DocumentContextProvider>
-                <section className="main__menu">
-                    <SideBar createDocument={createDocument} />
-                </section>
-                <section className="main__content">
-                    <Header deleteDocument={deleteDocument} saveDocument={saveDocument}/>
-                    <Editor />
-                </section>
-            </DocumentContextProvider>
+            <section className="main__menu">
+                <SideBar createDocument={createDocument} />
+            </section>
+            <section className="main__content">
+                <Header saveDocument={saveDocument}/>
+                <Editor />
+            </section>
+            {modalStatus === 'open-delete' && <Modal 
+                title='Delete this document?' 
+                message={`Are you sure you want to delete the '${activeDocument.name}' document and its contents? This action cannot be reversed.`} 
+                buttonPrimaryText='Confirm & Delete' 
+                actionPrimary={() => deleteDocument(activeDocument.id)} 
+            />}
+            {modalStatus === 'open-unsaved' && <Modal 
+                title='Unsaved changes!' 
+                message={`There have been some changes made to the '${activeDocument.name}' document? Would you like to save them?`} 
+                buttonPrimaryText='Confirm & Save' 
+                actionPrimary={() => saveDocument(documentData)} 
+                buttonSecondaryText='Discard changes'
+                actionSecondary={() => saveDocument(activeDocument)}
+            />}
         </main>
     );
 };

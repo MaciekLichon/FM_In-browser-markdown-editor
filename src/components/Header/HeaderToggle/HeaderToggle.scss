@@ -35,14 +35,14 @@
       }
     }
 
-    &:hover span {
-      transition: 
+    &_open {
+
+      span {
+        transition: 
           translate $transition-regular,
           opacity 0ms $transition-regular,
           transform $transition-regular $transition-regular;
-    }
-
-    &_open, &:hover {
+      }
 
       span:nth-child(1) {
         translate: 0 7px;

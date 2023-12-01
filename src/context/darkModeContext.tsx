@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
 
-/* ----------- THIS CONTEXT HOLDS EDITED AND UNSAVED DOCUMENT'S DATA I.E. NAME AND MARKUP ----------- */
-
 /* ---- create context ---- */
 type IDarkModeContextValue = boolean;
 type IDarkModeToggleContextValue = React.MouseEventHandler<HTMLButtonElement>;

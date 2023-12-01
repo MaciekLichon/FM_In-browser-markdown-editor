@@ -1,10 +1,13 @@
 import React from "react";
 import "./FileName.scss";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateActiveId } from "../../redux/activeDocumentRedux";
+import { getActiveDocument } from "../../redux/documentsRedux";
+import { useDocumentContext } from "../../context/documentContext";
 
 import iconDocument from "../../assets/icon-document.svg";
+import { useModalToggleContext } from "../../context/modalContext";
 
 interface IProps {
   id: string;
@@ -15,8 +18,20 @@ interface IProps {
 const FileNameButton: React.FC<IProps> = ({ id, dateAdded, fileName }) => {
   const dispatch = useDispatch();
 
+  const setModalStatus = useModalToggleContext();
+  const activeDocument = useSelector(getActiveDocument); // saved version of the CURRENT file (saved in redux)
+  const {documentData} = useDocumentContext(); // potentially edited CURRENT file (saved in context state)
+
+  // check if saved / unsaved before switching to another file
   const handleClick = () => {
-    dispatch(updateActiveId(id));
+    const equalNames = activeDocument.name === documentData.name;
+    const equalContent = activeDocument.content === documentData.content;
+
+    if (!equalContent || !equalNames) {
+      setModalStatus('open-unsaved');
+    } else {
+      dispatch(updateActiveId(id));
+    }
   };
 
   return (

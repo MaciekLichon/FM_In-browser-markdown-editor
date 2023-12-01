@@ -1,5 +1,6 @@
 :root {
     --clr-100: rgba(255, 255, 255, 1);
+    --clr-100-forced: rgba(255, 255, 255, 1); // to ignore theme changes
     --clr-200: rgba(245, 245, 245, 1);
     --clr-200-otherDark: rgba(245, 245, 245, 1);
     --clr-300: rgba(228, 228, 228, 1);
@@ -16,17 +17,25 @@
 }
 
 .darkmode .editor {
-    --clr-100: rgba(21, 22, 25, 1); // done
-    --clr-200: rgba(43, 45, 49, 1); // done
-    --clr-200-otherDark: rgba(29, 31, 34, 1); // done
-    --clr-300: rgba(90, 96, 105, 1); // done
-    --clr-500: rgba(193, 196, 203, 1); // done
-    --clr-700: rgba(255, 255, 255, 1); // done
+    --clr-100: rgba(21, 22, 25, 1);
+    --clr-200: rgba(43, 45, 49, 1);
+    --clr-200-otherDark: rgba(29, 31, 34, 1);
+    --clr-300: rgba(90, 96, 105, 1);
+    --clr-500: rgba(193, 196, 203, 1);
+    --clr-700: rgba(255, 255, 255, 1);
+}
+
+.darkmode .modal {
+    --clr-100: rgba(29, 31, 34, 1);
+    --clr-500: rgba(193, 196, 203, 1);
+    --clr-700: rgba(255, 255, 255, 1);
+    --clr-1000: rgba(124, 129, 135, 1);
 }
 
 /* --------- COLORS --------- */
 
 $clr-100: var(--clr-100);
+$clr-100-forced: var(--clr-100-forced);
 $clr-200: var(--clr-200);
 $clr-200-otherDark: var(--clr-200-otherDark);
 $clr-300: var(--clr-300);
