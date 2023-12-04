@@ -73,7 +73,6 @@ const Layout: React.FC = () => {
         dispatch(editDocument({ ...document }));
         setModalStatus("closed");
     };
-    
 
     return (
         <main className={`main ${isSidebarOpen ? "main_open" : ""} ${ isDarkMode ? "darkmode" : "" }`} >

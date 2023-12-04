@@ -17,7 +17,12 @@ const reducer = combineReducers(subreducers);
 const store = createStore(
   reducer,
   initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+store.subscribe(() => {
+  const documents = store.getState().documents;
+  localStorage.setItem('documents', JSON.stringify(documents));
+})
 
 export default store;

@@ -12,8 +12,10 @@ export interface IState {
   selectedDocumentId: IDocumentId;
 }
 
+const browserData = localStorage.getItem('documents');
+
 const initialState: IState = {
-  documents: [
+  documents: browserData !== null ? JSON.parse(browserData) : [
     {
       id: "0",
       createdAt: "04-01-2022",

@@ -7,6 +7,7 @@ const UPDATE_SELECTED_DOCUMENT_ID = createActionName("UPDATE_SELECTED_DOCUMENT_I
 // action creators
 export const updateActiveId = (payload: IDocumentId) => ({ type: UPDATE_SELECTED_DOCUMENT_ID, payload, });
 
+
 // subreducer
 const selectedDocumentIdReducer = (statePart = "", action) => {
   switch (action.type) {
