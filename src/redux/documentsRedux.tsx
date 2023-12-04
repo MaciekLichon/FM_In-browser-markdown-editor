@@ -16,7 +16,7 @@ export const addDocument = (payload: IDocument) => ({ type: ADD_DOCUMENT, payloa
 export const editDocument = (payload: IDocument) => ({ type: EDIT_DOCUMENT, payload, });
 
 // subreducer
-const documentsReducer = (statePart: IDocument[] = [], action) => {
+const documentsReducer = (statePart: IDocument[] = [], action: any) => {
   switch (action.type) {
     case REMOVE_DOCUMENT:
       return statePart.filter((document) => document.id !== action.payload);

@@ -9,7 +9,7 @@ export const updateActiveId = (payload: IDocumentId) => ({ type: UPDATE_SELECTED
 
 
 // subreducer
-const selectedDocumentIdReducer = (statePart = "", action) => {
+const selectedDocumentIdReducer = (statePart = "", action: any) => {
   switch (action.type) {
     case UPDATE_SELECTED_DOCUMENT_ID:
       return action.payload;
