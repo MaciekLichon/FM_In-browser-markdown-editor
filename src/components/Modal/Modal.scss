@@ -7,19 +7,13 @@
     height: 100vh;
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: $ff-roboto-slab;
+    overflow: auto; // allow modal scroll if height < modal
+    // overscroll-behavior: contain;
+    background-color: $clr-1000-transparent;
     
-    &__background {
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background-color: $clr-1000;
-        opacity: 0.5;
-    }
-
     &__content {
+        margin: auto; // center modal but prevent overflow if height < modal
         background-color: $clr-100; 
         padding: 1.5rem;
         display: flex;

@@ -19,9 +19,15 @@ const Modal: React.FC<IProps> = ({title, message, buttonPrimaryText, actionPrima
         setModalStatus('closed');
     }
 
+    const closeModalOnBgClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {     
+        const clickedElement = e.target as HTMLDivElement;           
+        if (clickedElement.classList.contains('modal')) {
+            closeModal();
+        }
+    }
+
     return (
-        <div className="modal">
-            <div className="modal__background" onClick={closeModal}></div>
+        <div className="modal" onClick={closeModalOnBgClick}>
             <div className="modal__content">
                 <div className="modal__header">
                     <h4 className="modal__title">{title}</h4>

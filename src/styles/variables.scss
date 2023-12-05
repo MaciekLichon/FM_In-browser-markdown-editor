@@ -11,6 +11,7 @@
     --clr-800: rgba(43, 45, 49, 1);
     --clr-900: rgba(29, 31, 34, 1);
     --clr-1000: rgba(21, 22, 25, 1);
+    --clr-1000-transparent: rgba(21, 22, 25, 0.5);
 
     --clr-orange: rgba(228, 102, 67, 1);
     --clr-orange-hover: rgba(243, 151, 101, 1);
@@ -46,6 +47,7 @@ $clr-700: var(--clr-700);
 $clr-800: var(--clr-800);
 $clr-900: var(--clr-900);
 $clr-1000: var(--clr-1000);
+$clr-1000-transparent: var( --clr-1000-transparent);
 
 $clr-orange: var(--clr-orange);
 $clr-orange-hover: var(--clr-orange-hover);

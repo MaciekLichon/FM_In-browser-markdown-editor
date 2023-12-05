@@ -21,8 +21,8 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  const documents = store.getState().documents;
-  localStorage.setItem('documents', JSON.stringify(documents));
+  const documents = store.getState();
+  localStorage.setItem('documentsState', JSON.stringify(documents));
 })
 
 export default store;

@@ -18,6 +18,11 @@ export const ModalContextProvider: React.FC<IProps> = ({children}) => {
     const [modalStatus, setModalStatus] = useState<IModalContextValue>('closed');
     const showModal: IModalToggleContextValue = (value) => {
         setModalStatus(value);
+        if (value !== 'closed') {
+            document.documentElement.classList.add('no-scroll');
+        } else {
+            document.documentElement.classList.remove('no-scroll');
+        }
     }
 
     return (
