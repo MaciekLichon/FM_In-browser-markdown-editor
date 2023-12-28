@@ -12,7 +12,7 @@ const selectedDocumentIdSlice = createSlice({
     name: "selectedDocumentId",
     initialState,
     reducers: {
-        updateActiveId: (state, action: PayloadAction<DocumentIdState>) => {
+        updateActiveId: (_, action: PayloadAction<DocumentIdState>) => {
             return action.payload;
         },
     },
