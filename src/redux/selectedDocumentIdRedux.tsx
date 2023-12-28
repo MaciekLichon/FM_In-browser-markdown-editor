@@ -1,21 +1,22 @@
-import { IDocumentId } from "./initialState";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// actions
-const createActionName = (actionName: string) => `app/documents/${actionName}`;
-const UPDATE_SELECTED_DOCUMENT_ID = createActionName("UPDATE_SELECTED_DOCUMENT_ID");
+// -------- data --------
+export type DocumentIdState = string;
 
-// action creators
-export const updateActiveId = (payload: IDocumentId) => ({ type: UPDATE_SELECTED_DOCUMENT_ID, payload, });
+const browserData = localStorage.getItem("documentsState");
 
+const initialState: DocumentIdState = browserData !== null ? JSON.parse(browserData).selectedDocumentId : "0";
 
-// subreducer
-const selectedDocumentIdReducer = (statePart = "", action: any) => {
-  switch (action.type) {
-    case UPDATE_SELECTED_DOCUMENT_ID:
-      return action.payload;
-    default:
-      return statePart;
-  }
-};
+// -------- slice --------
+const selectedDocumentIdSlice = createSlice({
+    name: "selectedDocumentId",
+    initialState,
+    reducers: {
+        updateActiveId: (state, action: PayloadAction<DocumentIdState>) => {
+            return action.payload;
+        },
+    },
+});
 
-export default selectedDocumentIdReducer;
+export const { updateActiveId } = selectedDocumentIdSlice.actions;
+export default selectedDocumentIdSlice.reducer;

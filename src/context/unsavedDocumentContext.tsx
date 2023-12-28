@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getSavedActiveDocument } from "../redux/documentsRedux";
-import { IDocument } from "../redux/initialState";
+import { IDocument } from "../redux/documentsRedux";
 
 /* ----------- THIS CONTEXT HOLDS EDITED AND UNSAVED DOCUMENT'S DATA I.E. NAME AND MARKUP ----------- */
 
@@ -20,10 +20,12 @@ interface IProps {
 
 export const UnsavedDocumentContextProvider: React.FC<IProps> = ({ children, }) => {
   const savedActiveDocument = useSelector(getSavedActiveDocument);
+  
   const [unsavedActiveDocument, setUnsavedActiveDocument] = useState<IDocument>(savedActiveDocument);
-
+  
   useEffect(() => {
     setUnsavedActiveDocument(savedActiveDocument);
+    // console.log('changed');
   }, [savedActiveDocument]);
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.scss";
 
-import { IDocument } from "../../redux/initialState";
+import { IDocument } from "../../redux/documentsRedux";
 
 import iconSave from "../../assets/icon-save.svg";
 import logo from "../../assets/logo.svg";

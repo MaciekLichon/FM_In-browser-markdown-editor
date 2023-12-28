@@ -7,8 +7,7 @@ import Markdown from "react-markdown";
 
 const Editor: React.FC = () => {
   const [isPreviewFullWidth, setIsPreviewFullWidth] = useState(false);
-  const { unsavedActiveDocument, setUnsavedActiveDocument } =
-    useUnsavedDocumentContext();
+  const { unsavedActiveDocument, setUnsavedActiveDocument } = useUnsavedDocumentContext();
 
   // -----------
   // update textarea's height with content to prevent container overflow and scrollbar from appearing

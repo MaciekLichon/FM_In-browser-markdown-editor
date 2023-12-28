@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { getTodaysDate } from "../../utils";
 
 import { useSelector, useDispatch } from "react-redux";
-import { IDocument } from "../../redux/initialState";
+import { IDocument } from "../../redux/documentsRedux";
 import { getSavedActiveDocument, getAllDocuments, removeDocument, editDocument, addDocument, } from "../../redux/documentsRedux";
 import { updateActiveId } from "../../redux/selectedDocumentIdRedux";
 
@@ -69,7 +69,7 @@ const Layout: React.FC = () => {
         setModalStatus("closed");
     };
 
-    const saveDocument = (document: IDocument) => {
+    const saveDocument = (document: IDocument) => {            
         dispatch(editDocument({ ...document }));
         setModalStatus("closed");
     };

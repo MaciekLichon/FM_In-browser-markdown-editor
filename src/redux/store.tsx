@@ -1,28 +1,20 @@
-import { createStore, combineReducers } from "redux";
-import initialState from "./initialState";
+import { configureStore } from "@reduxjs/toolkit";
 import documentsReducer from "./documentsRedux";
 import selectedDocumentIdReducer from "./selectedDocumentIdRedux";
 
-// reducer
-
-const subreducers = {
-  documents: documentsReducer,
-  selectedDocumentId: selectedDocumentIdReducer,
-};
-
-const reducer = combineReducers(subreducers);
-
-// store
-
-const store = createStore(
-  reducer,
-  initialState,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-);
+export const store = configureStore({
+    reducer: {
+        documents: documentsReducer,
+        selectedDocumentId: selectedDocumentIdReducer,
+    },
+});
 
 store.subscribe(() => {
-  const documents = store.getState();
-  localStorage.setItem('documentsState', JSON.stringify(documents));
-})
+    const documents = store.getState();
+    localStorage.setItem("documentsState", JSON.stringify(documents));
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;
